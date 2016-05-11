@@ -29,7 +29,7 @@
   },
   "main": "application.js",
   "scripts": {
-    "test": "grunt unit",
+    "test": "./node_modules/.bin/mocha -u exports test/**/*",
     "debug": "grunt serve",
     "start": "node application.js"
   },

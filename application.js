@@ -23,6 +23,13 @@ app.use(express.static(__dirname + '/public'));
 app.use(mbaasExpress.fhmiddleware());
 
 app.use('/hello', require('./lib/hello.js')());
+app.get('/add', function(req, res){
+  if (!req.query.a || !req.query.b){
+    return res.status(400).json({ message : 'Query params a and b are required for addition' });
+  }
+  return res.json({});
+});
+
 
 // Important that this is last!
 app.use(mbaasExpress.errorHandler());
@@ -32,3 +39,5 @@ var host = process.env.OPENSHIFT_NODEJS_IP || '0.0.0.0';
 app.listen(port, host, function() {
   console.log("App started at: " + new Date() + " on port: " + port); 
 });
+
+module.exports = app;
