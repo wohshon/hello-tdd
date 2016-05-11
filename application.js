@@ -27,9 +27,22 @@ app.get('/add', function(req, res){
   if (!req.query.a || !req.query.b){
     return res.status(400).json({ message : 'Query params a and b are required for addition' });
   }
-  return res.json({});
+  var a=parseInt(req.query.a);
+  var b=parseInt(req.query.b);  
+  var mathAdd=require('./math/add.js');
+  return res.json({msg: ' result:'+mathAdd(a,b) });
 });
 
+app.get('/subtract', function(req, res){
+  if (!req.query.a || !req.query.b){
+    return res.status(400).json({ message : 'Query params a and b are required for subtraction' });
+  }
+  var a=parseInt(req.query.a);
+  var b=parseInt(req.query.b);  
+   var mathSub=require('./math/subtract.js');
+  return res.json({msg: ' result:'+mathSub(a,b) });
+
+});
 
 // Important that this is last!
 app.use(mbaasExpress.errorHandler());
